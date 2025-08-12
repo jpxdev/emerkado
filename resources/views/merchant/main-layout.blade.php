@@ -24,6 +24,9 @@
     <link rel="stylesheet" href="{{ asset('css/summernote-bs4.min.css') }}">
     <link rel="stylesheet" href="{{ asset('css/bootstrap-toggle.min.css') }}">
     <link rel="stylesheet" href="{{ asset('css/jquery-ui.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/dataTables.bootstrap4.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/buttons.bootstrap4.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/responsive.bootstrap4.min.css') }}">
     @yield('styles')
 </head>
 
@@ -47,7 +50,7 @@
                         <i class="far fa-user"></i>
                     </a>
                     <div class="dropdown-menu dropdown-menu-right"> 
-                        <a href="#" class="dropdown-item">
+                        <a href="{{ route('merchant-profile') }}" class="dropdown-item">
                             <i class="mr-2 fas fa-file"></i>
                             {{ __('My profile') }}
                         </a>
@@ -116,6 +119,12 @@
     <script src="{{ asset('js/summernote.min.js') }}" defer></script>
     <script src="{{ asset('js/summernote-bs4.min.js') }}" defer></script>
     <script src="{{ asset('js/custom_functions.js') }}" defer></script>
+    <script src="{{ asset('js/jquery.dataTables.min.js') }}" defer></script>
+    <script src="{{ asset('js/dataTables.bootstrap4.min.js') }}" defer></script>
+    <script src="{{ asset('js/dataTables.responsive.min.js') }}" defer></script>
+    <script src="{{ asset('js/responsive.bootstrap4.min.js') }}" defer></script>
+    <script src="{{ asset('js/dataTables.buttons.min.js') }}" defer></script>
+
     
     @yield('scripts')
     @stack('scripts')

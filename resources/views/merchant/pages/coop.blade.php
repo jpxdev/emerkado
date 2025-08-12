@@ -1,6 +1,6 @@
 <?php use App\Helpers\Functions; ?>
 
-@extends('admin.main-layout')
+@extends('merchant.main-layout')
 
 @section('content')
     <!-- Content Header (Page header) -->
@@ -8,11 +8,11 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1>{{ __('COOP') }}</h1>
+                    <h2>{{ __('COOP') }}</h2>
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
-                        <li class="breadcrumb-item"><a href="{{ route('admin-dashboard') }}">Home</a></li>
+                        <li class="breadcrumb-item"><a href="{{ route('merchant-dashboard') }}">Home</a></li>
                         <li class="breadcrumb-item active">Coop</li>
                     </ol>
                 </div>
@@ -20,8 +20,8 @@
         </div><!-- /.container-fluid -->
     </section>
 
-<!-- start 
-    <div class="table-striped table-responsive">
+<!-- start -->
+    <!-- <div class="table-striped table-responsive">
         <table class="table m-0">
             <thead>
             <tr>
@@ -46,8 +46,8 @@
             @endforeach
             </tbody>
         </table>
-    </div>
--- end -->
+    </div> -->
+<!-- end -->
 
 <div>
     <p>
@@ -69,13 +69,6 @@
                                     <i class="fas fa-minus"></i>
                                 </button>
                             </div>
-
-                            <div class="d-flex flex-column">
-                                <h3 class="card-title">Coop Users</h3>
-                                <a href="{{ route('admin.pages.create_coop') }}" class="pt-2">
-                                    <button class="btn btn-primary">Add Coop</button>
-                                </a>
-                                </div>
                                 Role: <span id="status-badgeRole" class="badge badge-pill fontcolor-white {{ Functions::userrole_color('Coop') }}">Coop</span>
                             <!--div class="d-flex flex-column">
                                 <h3 class="card-title">Coop Users</h3>
@@ -105,13 +98,13 @@
                                                 </td>
                                                 <td class="align-middle">{{ $coop->email }}</td>
                                                 <td>
-                                                    <input data-id="{{$coop->id}}" class="approve_coop" type="checkbox" data-onstyle="success {{ $coop->review_status == 'Approved' ? '' : 'warning-disabled' }}" data-offstyle="warning {{ $coop->review_status == 'Approved' ? '' : 'warning-disabled' }}" data-toggle="toggle" data-on="Activated" data-off="Inactive" {{ $coop->status ? 'checked' : '' }} {{ $coop->review_status == 'Approved' ? '' : 'disabled' }}>
+                                                    <input data-id="{{$coop->id}}" class="merchant_approve_coop" type="checkbox" data-onstyle="success {{ $coop->review_status == 'Approved' ? '' : 'warning-disabled' }}" data-offstyle="warning {{ $coop->review_status == 'Approved' ? '' : 'warning-disabled' }}" data-toggle="toggle" data-on="Activated" data-off="Inactive" {{ $coop->status ? 'checked' : '' }} {{ $coop->review_status == 'Approved' ? '' : 'disabled' }}>
                                                 </td>
                                                 <td class="align-middle">{{ Functions::GetDateInterval($coop->created_at)  === "More than a month ago" ? $coop->created_at :  Functions::GetDateInterval($coop->created_at)}}</td>
                                                 <td class="align-middle {{ Functions::review_status_color($coop->review_status) }}"><i class="fas {{ Functions::review_status($coop->review_status) }}"></i> {{ $coop->review_status }}</td>
                                                 <td class="align-middle">
-                                                    <a href="{{ route('admin.pages.review_coop', $coop->id ) }}" class="btn btn-tool"><i class="fas fa-pen"></i></a>
-                                                    <a href="javascript:void(0)" onclick="delete_coop('{{ $coop->id }}')" class="btn btn-tool"><i class="fa fa-trash color-danger"></i></a>
+                                                    <a href="{{ route('merchant.pages.review_coop', $coop->id ) }}" class="btn btn-tool"><i class="fas fa-pen"></i></a>
+                                                    <a href="javascript:void(0)" onclick="merchant_delete_coop('{{ $coop->id }}')" class="btn btn-tool"><i class="fa fa-trash color-danger"></i></a>
                                                 </td>
                                             </tr>
                                         @endforeach

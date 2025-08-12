@@ -7,6 +7,7 @@ use App\Http\Controllers\Merchant\{AuthMerchantController, ProfileMerchantContro
 use App\Http\Controllers\Buyer\{AuthBuyerController, ProfileBuyerController as BuyerProfileController};
 use App\Http\Controllers\Auth\{LoginController, RegisterController};
 use App\Http\Middleware\{AuthenticateSysUsers, AdminAuth, CoopAuth, BuyerAuth, MerchantAuth};
+use App\Http\Livewire\Notification;
 
 // Login routes
 Route::get('/user-login', [LoginController::class, 'getLogin'])->name('getLogin')->middleware('guest');
@@ -39,24 +40,24 @@ Route::middleware(['auth:admin', AuthenticateSysUsers::class])->group(function (
     });
 
     // Coop routes
-    Route::get('/admin/coop', [AdminUserController::class, 'coop'])->name('pages.coop');
+    Route::get('/admin/coop', [AdminUserController::class, 'coop'])->name('admin.pages.coop');
     // Create  
-    Route::get('/admin/coop/create_coop', [AdminUserController::class, 'create_coop'])->name('pages.create_coop');
-    Route::post('/admin/coop', [CoopController::class, 'add_coop'])->name('create.coop');
+    Route::get('/admin/coop/create_coop', [AdminUserController::class, 'create_coop'])->name('admin.pages.create_coop');
+    Route::post('/admin/coop', [CoopController::class, 'add_coop'])->name('admin.create.coop');
     // Delete
     Route::delete('/admin/coop/delete_coop/{id}', [AdminUserController::class, 'delete_coop']);
     // Approve
     Route::get('/admin/coop/approve_coop', [AdminUserController::class, 'approve_coop']);
     // Review Coop
-    Route::get('/admin/coop/review_coop/id={id}', [AdminUserController::class, 'review_coop'])->name('pages.review_coop');
-    Route::post('/admin/coop/review_coop/id={id}', [AdminUserController::class, 'approved_review_coop'])->name('approved.review_coop');
+    Route::get('/admin/coop/review_coop/id={id}', [AdminUserController::class, 'review_coop'])->name('admin.pages.review_coop');
+    Route::post('/admin/coop/review_coop/id={id}', [AdminUserController::class, 'approved_review_coop'])->name('admin.approved.review_coop');
 
 
     // Merchant routes
-    Route::get('/admin/merchant', [AdminUserController::class, 'merchant'])->name('pages.merchant');
+    Route::get('/admin/merchant', [AdminUserController::class, 'merchant'])->name('admin.pages.merchant');
     // Create
-    Route::get('/admin/merchant/create_merchant', [AdminUserController::class, 'create_merchant'])->name('pages.create_merchant');
-    Route::post('/admin/merchant', [MerchantController::class, 'add_merchant'])->name('create.merchant');
+    Route::get('/admin/merchant/create_merchant', [AdminUserController::class, 'create_merchant'])->name('admin.pages.create_merchant');
+    Route::post('/admin/merchant', [MerchantController::class, 'add_merchant'])->name('admin.create.merchant');
     // Delete
     Route::delete('/admin/merchant/delete_merchant/{id}', [AdminUserController::class, 'delete_merchant']);
     //Review merchant -- removed since it is no longer needed
@@ -65,45 +66,67 @@ Route::middleware(['auth:admin', AuthenticateSysUsers::class])->group(function (
     
 
     // Buyer routes
-    Route::get('/admin/buyer', [AdminUserController::class, 'buyer'])->name('pages.buyer');
-    // Create  
-    Route::get('/admin/buyer/create_buyer', [AdminUserController::class, 'create_buyer'])->name('pages.create_buyer');
-    Route::post('/admin/buyer', [BuyerController::class, 'add_buyer'])->name('create.buyer');
-    // Delete
+    Route::get('/admin/buyer', [AdminUserController::class, 'buyer'])->name('admin.pages.buyer');
+    // Create Buyer
+    Route::get('/admin/buyer/create_buyer', [AdminUserController::class, 'create_buyer'])->name('admin.pages.create_buyer');
+    Route::post('/admin/buyer', [BuyerController::class, 'add_buyer'])->name('admin.create.buyer');
+    // Delete Buyer
     Route::delete('/admin/buyer/delete_buyer/{id}', [AdminUserController::class, 'delete_buyer']);
-    // Approve
+    // Approve Buyer
     Route::get('/admin/buyer/approve_buyer', [AdminUserController::class, 'approve_buyer']);
     // Review Buyer
-    Route::get('/admin/buyer/review_buyer/id={id}', [AdminUserController::class, 'review_buyer'])->name('pages.review_buyer');
-    Route::post('/admin/buyer/review_buyer/id={id}', [AdminUserController::class, 'approved_review_buyer'])->name('approved.review_buyer');
+    Route::get('/admin/buyer/review_buyer/id={id}', [AdminUserController::class, 'review_buyer'])->name('admin.pages.review_buyer');
+    Route::post('/admin/buyer/review_buyer/id={id}', [AdminUserController::class, 'approved_review_buyer'])->name('admin.approved.review_buyer');
 
     // Review Routes
-    Route::get('/admin/review', [AdminUserController::class, 'review'])->name('pages.review');
-    Route::get('/admin/review/id={id}', [AdminUserController::class, 'review_details'])->name('pages.review_details');
-    Route::post('/admin/review/id={id}', [AdminUserController::class, 'approved_review'])->name('approved.review');
+    // Route::get('/admin/review', [AdminUserController::class, 'review'])->name('pages.review');
+    // Route::get('/admin/review/id={id}', [AdminUserController::class, 'review_details'])->name('admin.pages.review_details');
+    // Route::post('/admin/review/id={id}', [AdminUserController::class, 'approved_review'])->name('admin.approved.review');
 });
 
 // Coop routes
 Route::middleware(['auth:coop', AuthenticateSysUsers::class])->group(function () {
     Route::get('/coop/dashboard', [CoopProfileController::class, 'dashboard'])->name('coop-dashboard');
-});
-
-// Merchant routes
-Route::middleware(['auth:merchant', AuthenticateSysUsers::class])->group(function () {
-    Route::get('/merchant/dashboard', [MerchantProfileController::class, 'dashboard'])->name('merchant-dashboard');
-
-    // Review Routes
-    Route::get('/merchant/review', [MerchantUserController
-    ::class, 'review'])->name('pages.review');
-    Route::get('/merchant/review/id={id}', [MerchantUserController
-    ::class, 'review_details'])->name('pages.review_details');
-    Route::post('/merchant/review/id={id}', [MerchantUserController
-    ::class, 'approved_review'])->name('approved.review');
+    Route::get('/coop/profile/', [CoopProfileController::class, 'profile'])->name('coop-profile');
 });
 
 // Buyer routes
 Route::middleware(['auth:buyer', AuthenticateSysUsers::class])->group(function () {
     Route::get('/buyer/dashboard', [BuyerProfileController::class, 'dashboard'])->name('buyer-dashboard');
+    Route::get('/buyer/profile/', [BuyerProfileController::class, 'profile'])->name('buyer-profile');
+});
+
+
+// Merchant routes
+Route::middleware(['auth:merchant', AuthenticateSysUsers::class])->group(function () {
+    Route::get('/merchant/profile/', [MerchantProfileController::class, 'profile'])->name('merchant-profile');
+
+    Route::get('/merchant/dashboard', [MerchantProfileController::class, 'dashboard'])->name('merchant-dashboard');
+
+    // Coop routes
+    Route::get('/merchant/coop', [MerchantUserController::class, 'merchant_coop'])->name('merchant.pages.coop');
+    // Buyer routes
+    Route::get('/merchant/buyer', [MerchantUserController::class, 'merchant_buyer'])->name('merchant.pages.buyer');
+
+    // Review Routes
+
+    // Approve Coop
+    Route::get('/merchant/coop/merchant_approve_coop', [MerchantUserController::class, 'merchant_approve_coop']);
+    // Review Coop
+    Route::get('/merchant/coop/review_coop/id={id}', [MerchantUserController::class, 'merchant_review_coop'])->name('merchant.pages.review_coop');
+    Route::post('/merchant/coop/review_coop/id={id}', [MerchantUserController::class, 'merchant_approved_review_coop'])->name('merchant.pages.approved.review_coop');
+    // Delete Coop
+    Route::delete('/merchant/coop/delete_coop/{id}', [MerchantUserController::class, 'merchant_delete_coop']);
+
+
+    // Approve Buyer
+    Route::get('/merchant/buyer/merchant_approve_buyer', [MerchantUserController::class, 'merchant_approve_buyer']);
+    // Review Buyer
+    Route::get('/merchant/buyer/review_buyer/id={id}', [MerchantUserController::class, 'merchant_review_buyer'])->name('merchant.pages.review_buyer');
+    Route::post('/merchant/buyer/review_buyer/id={id}', [MerchantUserController::class, 'merchant_approved_review_buyer'])->name('merchant.approved.review_buyer');
+    
+    // Delete Buyer
+    Route::delete('/merchant/buyer/delete_buyer/{id}', [MerchantUserController::class, 'merchant_delete_buyer']);    
 });
 
 

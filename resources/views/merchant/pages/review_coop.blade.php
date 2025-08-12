@@ -1,6 +1,6 @@
 <?php use App\Helpers\Functions; ?>
 
-@extends('admin.main-layout')
+@extends('merchant.main-layout')
 
 @section('content')
     <!-- Content Header (Page header) -->
@@ -12,8 +12,8 @@
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
-                        <li class="breadcrumb-item"><a href="{{ route('admin-dashboard') }}">Home</a></li>
-                        <li class="breadcrumb-item active"><a href="{{ route('admin.pages.coop') }}">Coop</a></li>
+                        <li class="breadcrumb-item"><a href="{{ route('merchant-dashboard') }}">Home</a></li>
+                        <li class="breadcrumb-item active"><a href="{{ route('merchant.pages.coop') }}">Coop</a></li>
                         <li class="breadcrumb-item active">Review</li>
                     </ol>
                 </div>
@@ -55,7 +55,7 @@
 
  
 <!-- Modal -->
-<form action="{{ route('admin.pages.approved.review_coop', $coop->id ) }}" method="post" enctype="multipart/form-data">
+<form action="{{ route('merchant.pages.approved.review_coop', $coop->id ) }}" method="post" enctype="multipart/form-data">
 @csrf
 <div class="modal fade" id="modal-default" tabindex="-1" aria-labelledby="approvalModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-userapproval">
@@ -190,7 +190,7 @@
               <div class="card-header p-2">
                 <ul class="nav nav-pills">
                   <li class="nav-item"><a class="nav-link active" href="#activity" data-toggle="tab">Activity</a></li>
-                  <li class="nav-item"><a class="nav-link" href="#notification" data-toggle="tab">Notification</a></li>
+                  <livewire:notification />
                   <li class="nav-item"><a class="nav-link" href="#information" data-toggle="tab">Information</a></li>
                 </ul>
               </div><!-- /.card-header -->
@@ -358,8 +358,6 @@
                   <!-- /.tab-pane -->
               <div class="tab-pane" id="notification">
               <!-- /.card-header -->
-            
-                <livewire:notification />
                 
                   
 

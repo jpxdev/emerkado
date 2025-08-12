@@ -87,6 +87,23 @@ $(function() {
 });
 
 $(function() {
+    // Activate COOP record
+    $('.merchant_approve_coop').change(function() {
+        
+        var status = $(this).prop('checked') == true ? 1 : 0; 
+        var user_id = $(this).data('id');
+            $.ajax({
+            type: "GET",
+            dataType: "json",
+            url: '/merchant/coop/merchant_approve_coop/',
+            data: {'status': status, 'id': user_id}, success: function(data) {
+            console.log('Success')
+            }
+        });
+    });
+});
+
+$(function() {
     // Activate Merchant record
     $('.approve_merchant').change(function() {
         
@@ -120,7 +137,62 @@ $(function() {
     });
 });
 
+$(function() {
+    // Activate Buyer record
+    $('.merchant_approve_buyer').change(function() {
+        
+        var status = $(this).prop('checked') == true ? 1 : 0; 
+        var user_id = $(this).data('id');
+            $.ajax({
+            type: "GET",
+            dataType: "json",
+            url: '/merchant/buyer/merchant_approve_buyer/',
+            data: {'status': status, 'id': user_id}, success: function(data) {
+            console.log('Success')
+            }
+        });
+    });
+});
 
 
+function merchant_delete_coop(id)
+{
+    if(confirm("Are you sure you want to delete this"))
+    {
+        $.ajaxSetup({
+    headers:
+        {
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+        });
+        $.ajax({
+            url:'/merchant/coop/delete_coop/'+id,
+            type:'DELETE',
+            success:function(result)
+            {
+                $("#"+result['table_row']).remove()
+            }
+        });
+    }
+}
 
-
+function merchant_delete_buyer(id)
+{
+    if(confirm("Are you sure you want to delete this"))
+    {
+        $.ajaxSetup({
+    headers:
+        {
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+        });
+        $.ajax({
+            url:'/merchant/buyer/delete_buyer/'+id,
+            type:'DELETE',
+            success:function(result)
+            {
+                $("#"+result['table_row']).remove()
+            }
+        });
+    }
+}

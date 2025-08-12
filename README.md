@@ -130,15 +130,23 @@ Finally create your own admin.
         (create a condition if profile is dispproved, user should immediately only view and be able to edit their profile.)
     - [x] Coop Login
         - [x] Coop Dashboard
-        - [ ] Coop Profile
+        - [x] Coop Profile
             - [ ] Coop Profile Edit
 
     - [x] Merchant Login
         - [x] Merchant Dashboard
-        
+        - [x] Merchant Profile
+            - [ ] Merchant Profile Edit
+            - [x] Coop Page
+                - [x] Approve Coop
+                - [x] Review Coop
+            - [x] Buyer Page
+                - [x] Approve Buyer
+                - [x] Review Buyer
+
     - [x] Buyer Login
         - [x] Buyer Dashboard
-        - [ ] Buyer Profile
+        - [x] Buyer Profile
             - [ ] Buyer Profile Edit
 
 #### End Notes.

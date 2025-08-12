@@ -68,7 +68,6 @@ class AuthBuyerController extends Controller
             'password_confirmation' => 'nullable|string|min:8',
             'user_role' => 'nullable|string|max:255',
             'review_status' => 'nullable|string|max:255',
-            'approved_by' => 'nullable|string|max:255',
             'date' => 'nullable|date'
         ]);
 
@@ -104,7 +103,7 @@ class AuthBuyerController extends Controller
             return response()->json(['message' => 'No records found.'], 404);
         } 
         // dd($newRecord);
-        $user_id = Functions::IDGenerator(new BuyerModel, 'user_id', 'COOP', 5, $id);
+        $user_id = Functions::IDGenerator(new BuyerModel, 'user_id', 'BUYER', 5, $id);
         // dd($user_id);
         // Define the user ID you want to set (e.g., from the request or another source)
         //$userId = $request->input($data_update); // Replace with your logic

@@ -34,6 +34,21 @@ $current_route=request()->route()->getName();
                         </p>
                     </a>
                 </li>
+
+                <li class="nav-item {{ in_array($current_route, ['merchant.pages.coop', 'merchant.pages.buyer', 'pages-merchant', 'pages-create_merchant', 'pages-create_coop', 'pages-review_coop', 'pages-create_buyer', 'pages-review_buyer' ]) ? 'menu-open' : '' }}">
+                    <a href="#" class="nav-link {{ in_array($current_route, ['merchant.pages.coop', 'merchant.pages.buyer', 'pages-merchant', 'pages-create_merchant', 'pages-create_coop', 'pages-review_coop', 'pages-create_buyer', 'pages-review_buyer']) ? 'active' : '' }}">
+                        <i class="nav-icon fas fa-users nav-icon"></i>
+                        <p>
+                            {{ __('Users Management') }}
+                            <i class="fas fa-angle-left right"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <livewire:unapproved-coop-user-tracker />
+                        <livewire:unapproved-buyer-user-tracker />
+                    </ul>
+                    <livewire:monthly-user-tracker />
+                </li>
             </ul>
         </nav>
         <!-- /.sidebar-menu -->
